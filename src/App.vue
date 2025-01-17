@@ -65,6 +65,19 @@
         <span>{{ refCount4 }}</span>
       </template>
     </ChildCountComponent>
+
+    <hr />
+
+    <li>
+      <span>age:</span>
+      <span>{{ age }}</span>
+    </li>
+    <li>
+      <button @click="addAge">age++</button>
+    </li>
+    <li>
+      <childAge v-model:child-age="age" @change-child-age="changChildAgeTrigger"></childAge>
+    </li>
   </ul>
   <div>
     <h2>相關連結:</h2>
@@ -79,6 +92,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import ChildCountComponent from './components/childCount.vue'
+import childAge from './components/childAge.vue'
 
 const refCount1 = ref(0)
 const doubleRefCount1 = computed(() => refCount1.value * 2)
@@ -128,6 +142,20 @@ const changeChildCount3Trigger = () => {
 
 const changeChildCount4Trigger = () => {
   console.log(`refCount4: ${refCount4.value}`)
+}
+
+/**
+ * 測試多層元件傳遞修改
+ */
+const age = ref(28)
+
+const addAge = () => {
+  age.value++
+  console.log(`age: ${age.value}`)
+}
+
+const changChildAgeTrigger = () => {
+  console.log(`age: ${age.value}`)
 }
 
 const links = [
