@@ -1,4 +1,5 @@
 <template>
+  <h1>示範不同情境下異動 writable computed 與 defineModel</h1>
   <ul>
     <li>
       <p>透過修改 ref 再接著取用 computed 的結果是同步的。</p>
@@ -65,6 +66,14 @@
       </template>
     </ChildCountComponent>
   </ul>
+  <div>
+    <h2>相關連結:</h2>
+    <ol>
+      <li v-for="link in links" :key="link">
+        <a :href="link" target="_blank" rel="noopener noreferrer">{{ link }}</a>
+      </li>
+    </ol>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -120,11 +129,22 @@ const changeChildCount3Trigger = () => {
 const changeChildCount4Trigger = () => {
   console.log(`refCount4: ${refCount4.value}`)
 }
+
+const links = [
+  'https://github.com/vuejs/core/issues/11832',
+  'https://github.com/vuejs/core/issues/6130',
+  //
+]
 </script>
 
 <style lang="css">
-li {
+#app {
   margin: 16px;
+}
+
+p,
+li {
+  margin: 8px 0;
 }
 
 body {
